@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>搜尋結果</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<div class="results-container">
+    <h1>搜尋結果</h1>
+    <p>關鍵字： <span th:text="${keyword}"></span></p>
+    <ul style="list-style:none; padding:0; margin:0;">
+        <li th:if="${results} == null">沒有搜尋結果</li>
+        <li th:each="node : ${results}" class="result-item">
+            <img th:if="${node.imageUrl != null}" 
+                 th:src="${node.imageUrl}" 
+                 alt="thumbnail" />
+            <div class="result-details">
+                <a th:href="${node.url}" target="_blank" 
+                   th:text="${node.name}"></a>
+                <div class="url" th:text="${node.url}"></div>
+                <div class="score">分數：<span th:text="${node.score}"></span></div>
+            </div>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
