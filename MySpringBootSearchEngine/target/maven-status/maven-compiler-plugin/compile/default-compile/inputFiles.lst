@@ -5,3 +5,4 @@
 /Users/junhsieh/MySpringBootSearchEngine/src/main/java/com/MySearchEngine/service/KeywordExtractorService.java
 /Users/junhsieh/MySpringBootSearchEngine/src/main/java/com/MySearchEngine/service/ScoreCalculatorService.java
 /Users/junhsieh/MySpringBootSearchEngine/src/main/java/com/MySearchEngine/service/SortingService.java
+/Users/junhsieh/MySpringBootSearchEngine/src/main/java/com/MySearchEngine/service/WebScrapingService.java
