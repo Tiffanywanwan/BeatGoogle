@@ -67,6 +67,10 @@ body, html {
     transform: scale(0.95);
 }
 
+.search-header {
+    margin-bottom: 20px;
+}
+
 /* Results Container */
 .results-container {
     width: 100%;
