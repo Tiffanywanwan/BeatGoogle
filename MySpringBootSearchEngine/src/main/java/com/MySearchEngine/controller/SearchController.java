@@ -54,9 +54,9 @@ public class SearchController {
             rawResults = googleQueryService.search(q);
         }
 
-        // 3. 計算關鍵字分數
+        // 3. 計算關鍵字分數，傳遞查詢關鍵字
         for (WebPageNode node : rawResults) {
-            double score = keywordExtractor.calculateScore(node);
+            double score = keywordExtractor.calculateScore(node, q);
             node.setScore(score);
         }
 

@@ -15,14 +15,14 @@ import com.MySearchEngine.model.WebPageNode;
 @Service
 public class WebScrapingService {
 
-    private static final String[] EXTRA_KEYWORDS = {"服飾", "購買", "商品"};
+    private static final String[] EXTRA_KEYWORDS = {"服裝", "購買"};
 
     public List<WebPageNode> scrapeWeb(String query) {
         List<WebPageNode> results = new ArrayList<>();
         try {
             // 組合關鍵字
             String modifiedQuery = query + " " + String.join(" ", EXTRA_KEYWORDS);
-            String url = "https://www.google.com/search?q=" + modifiedQuery;
+            String url = "https://www.google.com/search?q=" + modifiedQuery + "&num=50";
 
             // 使用 Jsoup 爬取資料
             Document doc = Jsoup.connect(url)
@@ -30,8 +30,11 @@ public class WebScrapingService {
                                 .get();
 
             // 選取搜索結果容器
+            int maxResults = 15;
             Elements searchResults = doc.select("div.g");
             for (Element result : searchResults) {
+                if (results.size() >= maxResults) break; // 如果已經達到最大結果數量，停止添加
+
                 Element link = result.selectFirst("a");
                 Element title = result.selectFirst("h3");
 
