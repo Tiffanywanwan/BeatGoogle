@@ -1,0 +1,42 @@
+<!-- result.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>搜尋結果</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<div class="search-container">
+    <form th:action="@{/search}" method="get">
+        <div class="search-box">
+            <svg width="20" height="20" fill="#999" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.397h-.001l3.85 
+                3.85a1 1 0 0 0 1.414-1.414l-3.85-3.85zm-5.242 
+                0a5 5 0 1 1 0-10 5 5 0 0 1 0 
+                10z"></path>
+            </svg>
+            <input type="text" name="q" placeholder="請輸入想搜尋的衣服圖案" required/>
+            <button type="submit">Search</button>
+        </div>
+    </form>
+</div>
+<div class="results-container">
+    <h1>搜尋結果</h1>
+    <p>關鍵字： <span th:text="${keyword}"></span></p>
+    <ul style="list-style:none; padding:0; margin:0;">
+        <li th:if="${results} == null">沒有搜尋結果</li>
+        <li th:each="node : ${results}" class="result-item">
+            <img th:if="${node.imageUrl != null}" 
+                 th:src="${node.imageUrl}" 
+                 alt="thumbnail" />
+            <div class="result-details">
+                <a th:href="${node.url}" target="_blank" 
+                   th:text="${node.name}"></a>
+                <div class="score">分數：<span th:text="${node.score}"></span></div>
+            </div>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
