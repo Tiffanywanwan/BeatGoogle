@@ -69,13 +69,13 @@ public class SearchController {
 
             // 提取前三個網頁的所有文字
             List<String> topThreeTexts = new ArrayList<>();
-            for (int i = 0; i < Math.min(3, sorted.size()); i++) {
+            for (int i = 0; i < Math.min(5, sorted.size()); i++) {
                 String text = webScrapingService.scrapeContent(sorted.get(i).getUrl());
                 topThreeTexts.add(text);
             }
 
             // 計算最高頻關鍵字
-            List<String> topKeywords = keywordFrequencyService.extractTopKeywords(topThreeTexts, 3);
+            List<String> topKeywords = keywordFrequencyService.extractTopKeywords(topThreeTexts, 5);
             model.addAttribute("topKeywords", topKeywords);
         } else {
             model.addAttribute("results", null);

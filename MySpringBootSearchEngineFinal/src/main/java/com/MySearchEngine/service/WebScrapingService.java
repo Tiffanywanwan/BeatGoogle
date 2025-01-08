@@ -54,7 +54,7 @@ public class WebScrapingService {
             Document doc = Jsoup.connect(url)
                                 .userAgent("Mozilla/5.0")
                                 .get();
-            return doc.body().text(); // 提取網頁正文文字
+            return doc.title(); // 提取網頁正文文字
         } catch (IOException e) {
             e.printStackTrace();
             return "";
