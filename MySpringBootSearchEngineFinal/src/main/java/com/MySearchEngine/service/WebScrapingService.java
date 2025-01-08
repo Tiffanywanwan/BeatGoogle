@@ -20,20 +20,17 @@ public class WebScrapingService {
     public List<WebPageNode> scrapeWeb(String query) {
         List<WebPageNode> results = new ArrayList<>();
         try {
-            // 組合關鍵字
             String modifiedQuery = query + " " + String.join(" ", EXTRA_KEYWORDS);
             String url = "https://www.google.com/search?q=" + modifiedQuery + "&num=50";
 
-            // 使用 Jsoup 爬取資料
             Document doc = Jsoup.connect(url)
                                 .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36")
                                 .get();
 
-            // 選取搜索結果容器
             int maxResults = 15;
             Elements searchResults = doc.select("div.g");
             for (Element result : searchResults) {
-                if (results.size() >= maxResults) break; // 如果已經達到最大結果數量，停止添加
+                if (results.size() >= maxResults) break;
 
                 Element link = result.selectFirst("a");
                 Element title = result.selectFirst("h3");
@@ -45,9 +42,22 @@ public class WebScrapingService {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace(); // 日誌異常
+            e.printStackTrace();
         }
 
         return results;
+    }
+
+    // 新增提取網頁內容的方法
+    public String scrapeContent(String url) {
+        try {
+            Document doc = Jsoup.connect(url)
+                                .userAgent("Mozilla/5.0")
+                                .get();
+            return doc.body().text(); // 提取網頁正文文字
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 }

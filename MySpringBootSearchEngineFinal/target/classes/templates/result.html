@@ -41,6 +41,12 @@
         </div>
     </form>
 </div>
+<div class="top-keywords">
+    <h2>前三名網頁的熱門關鍵字</h2>
+    <ul>
+        <li th:each="keyword : ${topKeywords}" th:text="${keyword}"></li>
+    </ul>
+</div>
 <div class="results-container">
     <h1>搜尋結果</h1>
     <p>關鍵字： <span th:text="${keyword}"></span></p>
